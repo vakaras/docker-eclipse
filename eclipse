@@ -1,8 +1,9 @@
 #!/bin/bash
 
+mkdir -p workspace
 docker run -ti --rm \
            -e DISPLAY=$DISPLAY \
            -v /tmp/.X11-unix:/tmp/.X11-unix \
            -v "$(pwd)/workspace:/home/developer/workspace" \
            -v "$(pwd):/home/developer/root" \
-           vakaras/eclipse-java:v4.4.1
+           vakaras/eclipse-java-gcc:v4.4.1

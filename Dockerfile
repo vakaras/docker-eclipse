@@ -33,6 +33,7 @@ RUN chmod +x /usr/local/bin/eclipse && \
 
 RUN apt-get install -y git git-svn mercurial bzr && \
     apt-get install -y ant && \
+    apt-get install -y build-essential gcc-multilib && \
     apt-get clean && \
     rm -rf /tmp/*
 
