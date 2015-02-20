@@ -1,5 +1,5 @@
-FROM ubuntu:14.04
-MAINTAINER Fabio Rehm "fgrehm@gmail.com"
+FROM ubuntu:14.10
+MAINTAINER Vytautas Astrauskas "vastrauskas@gmail.com"
 
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     apt-get update && apt-get install -y software-properties-common && \
@@ -15,7 +15,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
 # the netbeans image
 RUN apt-get update && apt-get install -y libgtk2.0-0 libcanberra-gtk-module
 
-RUN wget http://eclipse.c3sl.ufpr.br/technology/epp/downloads/release/luna/SR1/eclipse-java-luna-SR1-linux-gtk-x86_64.tar.gz -O /tmp/eclipse.tar.gz -q && \
+RUN wget http://mirror.switch.ch/eclipse/technology/epp/downloads/release/luna/SR1a/eclipse-java-luna-SR1a-linux-gtk-x86_64.tar.gz -O /tmp/eclipse.tar.gz -q && \
     echo 'Installing eclipse' && \
     tar -xf /tmp/eclipse.tar.gz -C /opt && \
     rm /tmp/eclipse.tar.gz
@@ -30,6 +30,11 @@ RUN chmod +x /usr/local/bin/eclipse && \
     chmod 0440 /etc/sudoers.d/developer && \
     chown developer:developer -R /home/developer && \
     chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+
+RUN apt-get install -y git git-svn mercurial bzr && \
+    apt-get install -y ant && \
+    apt-get clean && \
+    rm -rf /tmp/*
 
 USER developer
 ENV HOME /home/developer
